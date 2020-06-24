@@ -29,8 +29,6 @@ def index():
     ]
     return render_template('index.html', title='Home')
 
-
-
 def img_predict(path):
     model_stock = load_model('./src/model_rps.h5')
     

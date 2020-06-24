@@ -38,3 +38,13 @@
 .result{
   margin-top: 20px;
 }
+
+.center-text{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.text-404{
+  font-size: 5rem;
+  margin-top: 50px;
+}
