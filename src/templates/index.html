@@ -10,18 +10,28 @@
     <div>
       <h1>Let's Battle!</h1>
       {% if result %}
-      <div class="alert alert-success" role="alert">
-        <strong>You win!</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="alert alert-danger" role="alert">
-        <strong>You Lose!</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+        {% if result.result == 1 %}
+          <div class="alert alert-success" role="alert">
+            <strong>You win!</strong> {{result.user}} beats {{result.comp}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true"> &times;</span>
+            </button>
+          </div>
+        {% elif result.result == -1 %}
+        <div class="alert alert-danger" role="alert">
+          <strong>You Lose!</strong> {{result.comp}} beats {{result.user}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"> &times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+          <strong>Draw!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
       {% else %}
       {% endif %}
       <div class="row">
@@ -29,7 +39,7 @@
           <div class="card card-bottom">
             <div class="card-header">
               Your Score : 
-              <span>0</span>
+              <span>{{point.user}}</span>
             </div>
             <div class="card-body">
               <div class="rps-card">
@@ -43,7 +53,10 @@
                   <input id="file" type=file name=file style='display:none;'>
                 </form>
               </div>
-              <h5 class="card-title result">Special title treatment</h5>
+              {% if result %}
+              <h5 class="card-title result">{{result.user}}</h5>
+              {% else %}
+              {% endif %}
             </div>
           </div>
         </div>
@@ -51,14 +64,22 @@
           <div class="card card-bottom">
             <div class="card-header">
               Comp Score : 
-              <span>0</span>
+              <span>{{point.comp}}</span>
             </div>
             <div class="card-body">
               <div class="rps-card">
+                {% if result %}
+                <img src="{{ url_for('.static', filename = 'img/'+result.comp+'.png') }}" 
+                     class="back-card">
+                {% else %}
                 <img src="{{ url_for('.static', filename = 'img/rps.png') }}" 
                      class="back-card">
+                {% endif %}
               </div>
-              <h5 class="card-title result">Special title treatment</h5>
+              {% if result %}
+              <h5 class="card-title result">{{result.comp}}</h5>
+              {% else %}
+              {% endif %}
               </div>
             </div>
           </div>

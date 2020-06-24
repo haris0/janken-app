@@ -3,9 +3,14 @@ from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from src import src
 import numpy as np
-from module.janken import img_predict
+from module.janken import img_predict, janken_game
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+point = {
+    'user': 0,
+    'comp': 0
+}
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -17,7 +22,9 @@ def root():
 
 @src.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    point['user'] = 0
+    point['comp'] = 0
+    return render_template('index.html', title='Home', point=point )
 
 @src.route('/index', methods=['GET', 'POST'])
 def upload_file():
@@ -34,8 +41,19 @@ def upload_file():
             path = os.path.join(src.config['UPLOAD_FOLDER'], filename)
             file.save(path)            
             classes = img_predict(path)
-            print(classes)
-            return render_template('index.html', title='Home')
+            
+            user, comp, game_result = janken_game(classes)
+            result = {
+                'user':user,
+                'comp':comp,
+                'result':game_result
+            }
+            if game_result == 1:
+                point['user'] += 1
+            elif game_result == -1:
+                point['comp'] += 1
+
+            return render_template('index.html', title='Home', result=result, point=point)
 
 @src.route('/about')
 def about():
