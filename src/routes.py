@@ -2,9 +2,8 @@ import os
 from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from src import src
-from keras.preprocessing import image
 import numpy as np
-from keras.models import load_model
+from module.janken import img_predict
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -14,22 +13,13 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @src.route('/')
+def root():
+    return redirect(url_for('index'))
+
 @src.route('/index')
 def index():
     return render_template('index.html', title='Home')
 
-def img_predict(path):
-    model_stock = load_model('./src/static/model/model_rps.h5')
-    
-    img = image.load_img(path, target_size=(200,200))
-    x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    images = np.vstack([x])
-    classes = model_stock.predict(images, batch_size=10)
-
-    return classes
-
-@src.route('/', methods=['GET', 'POST'])
 @src.route('/index', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
