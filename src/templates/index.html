@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% set active_page = "home" %}
+
+{% block title %}
+    {% if title %}{{ title }} {% else %} {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="container all fill">
+    <div>
+      <h1>Let's Battle!</h1>
+      {% if result %}
+      <div class="alert alert-success" role="alert">
+        <strong>You win!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-danger" role="alert">
+        <strong>You Lose!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% else %}
+      {% endif %}
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card card-bottom">
+            <div class="card-header">
+              Your Score : 
+              <span value=0></span>
+            </div>
+            <div class="card-body">
+              <div class="rps-card">
+                <img src="{{ url_for('.static', filename = 'img/rps.png') }}" 
+                     class="back-card">
+                <button id="upload" type="button" class="btn btn-info upload">
+                  <img src="{{ url_for('.static', filename = 'img/camera.png') }}" 
+                     class="camera">
+                </button>
+                <form id="form" method=post enctype=multipart/form-data>
+                  <input id="file" type=file name=file style='display:none;'>
+                </form>
+              </div>
+              <h5 class="card-title result">Special title treatment</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card card-bottom">
+            <div class="card-header">
+              Comp Score : 
+              <span>0</span>
+            </div>
+            <div class="card-body">
+              <div class="rps-card">
+                <img src="{{ url_for('.static', filename = 'img/rps.png') }}" 
+                     class="back-card">
+              </div>
+              <h5 class="card-title result">Special title treatment</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- {% for post in posts %}
+        <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+      {% endfor %} -->
+    </div>      
+  </div>
+{% endblock %}

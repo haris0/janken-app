@@ -1,0 +1,40 @@
+.all{
+  margin-top: 10px;
+}
+
+.card-bottom{
+  margin-bottom: 20px;
+}
+
+.rps-card{
+  width: 180px;
+  height: 250px;
+  background: lightgrey;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.back-card{
+  width: 60%;
+  display: block;
+  margin: auto;
+  padding-top: 40%;
+}
+
+.upload{
+  display: block !important;
+  margin: auto !important;
+  border-radius: 50px !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.camera{
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.result{
+  margin-top: 20px;
+}

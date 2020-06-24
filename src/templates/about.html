@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% set active_page = "about" %}
+
+{% block title %}
+    {% if title %}{{ title }} {% else %} Zeroapp {% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="container all">
+    <div class="boxs">
+      <h1>About</h1>
+    </div>      
+  </div>
+{% endblock %}
