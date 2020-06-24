@@ -5,7 +5,6 @@ from src import src
 import numpy as np
 from module.janken import img_predict
 
-
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 def allowed_file(filename):
