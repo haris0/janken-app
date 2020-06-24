@@ -16,21 +16,10 @@ def allowed_file(filename):
 @src.route('/')
 @src.route('/index')
 def index():
-    user = {'username': 'Riza'}
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
     return render_template('index.html', title='Home')
 
 def img_predict(path):
-    model_stock = load_model('./src/model_rps.h5')
+    model_stock = load_model('./src/static/model/model_rps.h5')
     
     img = image.load_img(path, target_size=(200,200))
     x = image.img_to_array(img)
@@ -65,5 +54,4 @@ def about():
 
 @src.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
     return render_template('404.html'), 404
