@@ -7,8 +7,29 @@
 
 {% block content %}
   <div class="container all">
-    <div class="boxs">
-      <h1>About</h1>
-    </div>      
+    <div class="card text-center">
+      <div class="card-header">
+        About
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Janken App</h5>
+        <p class="card-text">
+          This is a simple Janken game application, which uses the image classification feature. 
+          the image classification model is used to predict rock paper or scissors images, 
+          this model is the result of my final submission in the 
+          <a target="_blank" href="https://www.dicoding.com/academies/184">"Belajar Machine Learning untuk Pemula"</a> 
+          class from Dicoding.
+          <br><br>
+          Let's connect on 
+          <a target="_blank" href="https://www.linkedin.com/in/haris0/">Linkedin</a>, and follow me on 
+          <a target="_blank" href="https://github.com/haris0">Github</a>.
+        </p>
+        <img src="{{ url_for('.static', filename = 'img/rps.png') }}" 
+             class="logo-about"> 
+      </div>
+      <div class="card-footer text-muted">
+        Made with love by Hari Surrisyad
+      </div>
+    </div>  
   </div>
 {% endblock %}

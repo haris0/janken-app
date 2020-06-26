@@ -5,6 +5,7 @@ from src import src
 import numpy as np
 from module.janken import img_predict, janken_game
 
+
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 point = {
@@ -26,8 +27,17 @@ def index():
     point['comp'] = 0
     return render_template('index.html', title='Home', point=point )
 
+def cleaning_upload_dic(path):
+    if not os.listdir(path):
+        print('Folder Empty')
+    else:
+        filelist = [ f for f in os.listdir(path)]
+        for f in filelist:
+            os.remove(os.path.join(path, f))
+
 @src.route('/index', methods=['GET', 'POST'])
 def upload_file():
+    cleaning_upload_dic(src.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -46,7 +56,8 @@ def upload_file():
             result = {
                 'user':user,
                 'comp':comp,
-                'result':game_result
+                'result':game_result,
+                'file':filename
             }
             if game_result == 1:
                 point['user'] += 1

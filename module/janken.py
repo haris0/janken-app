@@ -3,9 +3,10 @@ from keras.models import load_model
 import numpy as np
 import random
 
+
 def img_predict(path):
     model_stock = load_model('./module/model_rps.h5')
-    
+
     img = image.load_img(path, target_size=(200,200))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)

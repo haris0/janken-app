@@ -6,7 +6,7 @@
   margin-bottom: 20px;
 }
 
-.rps-card{
+.back-card{
   width: 180px;
   height: 250px;
   background: lightgrey;
@@ -14,11 +14,12 @@
   border-radius: 8px;
 }
 
-.back-card{
+.logo-card{
   width: 60%;
   display: block;
   margin: auto;
   padding-top: 40%;
+  padding-bottom: 10px;
 }
 
 .upload{
@@ -47,4 +48,15 @@
 .text-404{
   font-size: 5rem;
   margin-top: 50px;
+}
+
+.margin-bottom{
+  margin-bottom: 20px;
+}
+
+.logo-about{
+  width: 150px;
+  display: block;
+  margin: auto;
+  padding-bottom: 10px;
 }

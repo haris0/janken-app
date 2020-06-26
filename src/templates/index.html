@@ -7,8 +7,14 @@
 
 {% block content %}
   <div class="container all fill">
-    <div>
-      <h1>Let's Battle!</h1>
+    <div class="margin-bottom">
+      <div class="row">
+        <div class="col-sm">
+          <h1>Let's Battle!</h1>
+        </div>
+        <div class="col-sm">
+        </div>
+      </div>
       {% if result %}
         {% if result.result == 1 %}
           <div class="alert alert-success" role="alert">
@@ -39,12 +45,17 @@
           <div class="card card-bottom">
             <div class="card-header">
               Your Score : 
-              <span>{{point.user}}</span>
+              <b>{{point.user}}</b>
             </div>
             <div class="card-body">
-              <div class="rps-card">
+              <div class="back-card">
+                {% if result %}
+                <img src="{{ url_for('.static', filename = 'upload/'+result.file) }}" 
+                      class="logo-card">
+                {% else %}
                 <img src="{{ url_for('.static', filename = 'img/rps.png') }}" 
-                     class="back-card">
+                    class="logo-card">
+                {% endif %} 
                 <button id="upload" type="button" class="btn btn-info upload">
                   <img src="{{ url_for('.static', filename = 'img/camera.png') }}" 
                      class="camera">
@@ -64,27 +75,28 @@
           <div class="card card-bottom">
             <div class="card-header">
               Comp Score : 
-              <span>{{point.comp}}</span>
+              <b>{{point.comp}}</b>
             </div>
             <div class="card-body">
-              <div class="rps-card">
+              <div class="back-card">
                 {% if result %}
                 <img src="{{ url_for('.static', filename = 'img/'+result.comp+'.png') }}" 
-                     class="back-card">
+                      class="logo-card">
                 {% else %}
                 <img src="{{ url_for('.static', filename = 'img/rps.png') }}" 
-                     class="back-card">
+                      class="logo-card">
                 {% endif %}
               </div>
               {% if result %}
               <h5 class="card-title result">{{result.comp}}</h5>
               {% else %}
               {% endif %}
-              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
 
       <!-- {% for post in posts %}
         <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
