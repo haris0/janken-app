@@ -2,16 +2,16 @@
 
 This is a simple Janken game application, which uses the image classification feature. 
 
-The image classification model is used to predict rock paper or scissors images,this [model](https://github.com/haris0/notebook_learning/blob/master/courses/dicoding_academy/CNN_Dicoding.ipynb) is the result of my final submission in the "Belajar Machine Learning untuk Pemula"
+The image classification model is used to predict rock paper or scissors images,this [model](https://github.com/haris0/notebook_learning/blob/master/courses/dicoding_academy/CNN_Dicoding.ipynb) is the result of my final submission in the "Belajar Machine Learning untuk Pemula" from Dicoding.
 
-let's check the demo here [here](https://jk-apps.herokuapp.com/)
+let's check the demo [here](https://jk-apps.herokuapp.com/).
 
 ## Preview
 ![page1](./app/static/preview/ss1.JPG)
 
 ![page2](./app/static/preview/ss2.JPG)
 
-![page2](./app/static/preview/ss3.JPG)
+![page3](./app/static/preview/ss3.JPG)
 
 ## Installing Setup
 Following this step to run the app :
