@@ -51,8 +51,8 @@ def upload_file():
             
             user, comp, game_result = janken_game(classes)
 
-            pointx = session.get('pointx', None)[0]
-            pointy = session.get('pointy', None)[0]
+            pointx = session['pointx'][0]
+            pointy = session['pointy'][0]
 
             if game_result != "Draw":
                 if game_result == "Win":
