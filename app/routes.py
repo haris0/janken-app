@@ -1,17 +1,14 @@
-import os
-from flask import Flask, render_template, flash, request, redirect, url_for
-from werkzeug.utils import secure_filename
 from app import app
+import os
+from flask import Flask, render_template, flash, request, redirect, url_for, g
+from werkzeug.utils import secure_filename
 import numpy as np
 from module.janken import img_predict, janken_game
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
-point = {
-    'user': 0,
-    'comp': 0
-}
+pointx, pointy= 0, 0
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -23,10 +20,9 @@ def root():
 
 @app.route('/index')
 def index():
-    global point
-    point['user'] = 0
-    point['comp'] = 0
-    return render_template('index.html', title='Home', point=point )
+    global pointx, pointy
+    pointx, pointy= 0, 0
+    return render_template('index.html', title='Home', pointx=pointx, pointy=pointy)
 
 def cleaning_upload_dic(path):
     if not os.listdir(path):
@@ -38,7 +34,8 @@ def cleaning_upload_dic(path):
 
 @app.route('/index', methods=['GET', 'POST'])
 def upload_file():
-    global point    
+    global pointx, pointy
+
     cleaning_upload_dic(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -55,22 +52,21 @@ def upload_file():
             classes = img_predict(path)
             
             user, comp, game_result = janken_game(classes)
-            
+
             if game_result != "Draw":
                 if game_result == "Win":
-                    point['user'] += 1
-                    point['comp'] = point['comp']
+                    pointx += 1
                 else:
-                    point['comp'] += 1
-                    point['user'] = point['user']
-
+                    pointy += 1
+            
             result = {
                 'user':user,
                 'comp':comp,
                 'result':game_result,
                 'file':filename
             }
-            return render_template('index.html', title='Home', result=result, point=point)
+
+            return render_template('index.html', title='Home', result=result, pointx=pointx, pointy=pointy)
 
 @app.route('/about')
 def about():
