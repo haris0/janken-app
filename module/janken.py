@@ -32,19 +32,19 @@ def battle(user, comp):
         return 0
     elif user == "Rock":
         if comp == "Paper":
-            return -1
+            return "Lose"
         else:
-            return 1
+            return "Win"
     elif user == "Paper":
         if comp == "Scissors":
-            return -1
+            return "Lose"
         else:
-            return 1
+            return "Win"
     elif user == "Scissors":
         if comp == "Rock":
-            return -1
+            return "Lose"
         else:
-            return 1
+            return "Win"
 
 def janken_game(classes):
     user = convert_classes(classes)

@@ -16,14 +16,14 @@
         </div>
       </div>
       {% if result %}
-        {% if result.result == 1 %}
+        {% if result.result == "Win" %}
           <div class="alert alert-success" role="alert">
             <strong>You win!</strong> {{result.user}} beats {{result.comp}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true"> &times;</span>
             </button>
           </div>
-        {% elif result.result == -1 %}
+        {% elif result.result == "Lose" %}
         <div class="alert alert-danger" role="alert">
           <strong>You Lose!</strong> {{result.comp}} beats {{result.user}}
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">

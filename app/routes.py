@@ -53,17 +53,20 @@ def upload_file():
             classes = img_predict(path)
             
             user, comp, game_result = janken_game(classes)
+            
+            if game_result == "Win":
+                point['user'] = (point['user'] + 1)
+            elif game_result == "Lose":
+                point['comp'] = (point['comp'] + 1)
+            else :
+                point['comp']
+
             result = {
                 'user':user,
                 'comp':comp,
                 'result':game_result,
                 'file':filename
             }
-            if game_result == 1:
-                point['user'] += 1
-            elif game_result == -1:
-                point['comp'] += 1
-
             return render_template('index.html', title='Home', result=result, point=point)
 
 @app.route('/about')
