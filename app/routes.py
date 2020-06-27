@@ -23,6 +23,7 @@ def root():
 
 @app.route('/index')
 def index():
+    global point
     point['user'] = 0
     point['comp'] = 0
     return render_template('index.html', title='Home', point=point )
@@ -37,6 +38,7 @@ def cleaning_upload_dic(path):
 
 @app.route('/index', methods=['GET', 'POST'])
 def upload_file():
+    global point
     cleaning_upload_dic(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -55,11 +57,11 @@ def upload_file():
             user, comp, game_result = janken_game(classes)
             
             if game_result == "Win":
-                point['user'] = (point['user'] + 1)
+                point['user'] += 1
             elif game_result == "Lose":
-                point['comp'] = (point['comp'] + 1)
+                point['comp'] += 1
             else :
-                point['comp']
+                point
 
             result = {
                 'user':user,
