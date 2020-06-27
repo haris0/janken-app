@@ -1,4 +1,4 @@
-from src import src
+from app import app
 
 if __name__ == '__main__':
-    src.run()
+    app.run()

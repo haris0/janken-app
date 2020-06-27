@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
-from src import src
+from app import app
 import numpy as np
 from module.janken import img_predict, janken_game
 
@@ -17,11 +17,11 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@src.route('/')
+@app.route('/')
 def root():
     return redirect(url_for('index'))
 
-@src.route('/index')
+@app.route('/index')
 def index():
     point['user'] = 0
     point['comp'] = 0
@@ -35,9 +35,9 @@ def cleaning_upload_dic(path):
         for f in filelist:
             os.remove(os.path.join(path, f))
 
-@src.route('/index', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def upload_file():
-    cleaning_upload_dic(src.config['UPLOAD_FOLDER'])
+    cleaning_upload_dic(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -48,7 +48,7 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            path = os.path.join(src.config['UPLOAD_FOLDER'], filename)
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(path)            
             classes = img_predict(path)
             
@@ -66,10 +66,10 @@ def upload_file():
 
             return render_template('index.html', title='Home', result=result, point=point)
 
-@src.route('/about')
+@app.route('/about')
 def about():
     return render_template('about.html', title='About')
 
-@src.errorhandler(404)
+@app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
