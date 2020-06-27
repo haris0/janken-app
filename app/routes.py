@@ -60,12 +60,9 @@ def upload_file():
                 if game_result == "Win":
                     point['user'] += 1
                     point['comp'] = point['comp']
-                elif game_result == "Lose":
+                else:
                     point['comp'] += 1
                     point['user'] = point['user']
-            else:
-                point['user'] = point['user']
-                point['comp'] = point['comp']
 
             result = {
                 'user':user,
