@@ -1,14 +1,12 @@
 from app import app
 import os
-from flask import Flask, render_template, flash, request, redirect, url_for, g
+from flask import Flask, render_template, flash, request, redirect, url_for, session
 from werkzeug.utils import secure_filename
 import numpy as np
 from module.janken import img_predict, janken_game
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-
-pointx, pointy= 0, 0
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -20,8 +18,9 @@ def root():
 
 @app.route('/index')
 def index():
-    global pointx, pointy
-    pointx, pointy= 0, 0
+    pointx, pointy = 0, 0
+    session['pointx'] = 0, 
+    session['pointy'] = 0,
     return render_template('index.html', title='Home', pointx=pointx, pointy=pointy)
 
 def cleaning_upload_dic(path):
@@ -34,7 +33,6 @@ def cleaning_upload_dic(path):
 
 @app.route('/index', methods=['GET', 'POST'])
 def upload_file():
-    global pointx, pointy
 
     cleaning_upload_dic(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
@@ -53,11 +51,17 @@ def upload_file():
             
             user, comp, game_result = janken_game(classes)
 
+            pointx = session.get('pointx', None)[0]
+            pointy = session.get('pointy', None)[0]
+
             if game_result != "Draw":
                 if game_result == "Win":
                     pointx += 1
                 else:
                     pointy += 1
+            
+            session['pointx'] = pointx, 
+            session['pointy'] = pointy,
             
             result = {
                 'user':user,
