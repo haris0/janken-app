@@ -29,7 +29,7 @@ def generate_janken():
 
 def battle(user, comp):
     if user == comp:
-        return 0
+        return "Draw"
     elif user == "Rock":
         if comp == "Paper":
             return "Lose"
